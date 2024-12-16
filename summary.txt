@@ -1,0 +1,33 @@
+2024 World Chess Championship analysis: empirical holistic approach
+Introduction
+The 2024 World Chess Championship between Gukesh Dommaraju and Ding Liren captivated chess fans worldwide, culminating in an unforgettable finish where Gukesh claimed the title, becoming the youngest-ever World Chess Champion.
+As a passionate chess enthusiast, I followed the games closely - not in real time, as the lengthy durations conflicted with my daily responsibilities, but I made sure to watch full game overviews and analyze the overall dynamics and momentum. This approach allowed me to appreciate the nuances of the match and gain deeper insights into the strategies employed by both players.
+Resources
+All the resources for this article are open sour
+Personal Match Impressions
+From the start it seemed to me that Gukesh was in the driver's seat of this match, and was much more active and the one taking the initiative in most games. Ding, on the other hand, was more on the defensive side, playing relatively passively, sometimes trying to go for an early draw even in games where there was still much to play for and he had the white pieces. Ultimately, I believe this strategy failed him in the final game, as trying to trade off the remaining material on the board and force a draw, rendered an otherwise equal position - a completely lost one.
+In addition, it was evident to me from the time management of both players, that Gukesh appeared to be more prepared as usually he was the one playing faster in the opening phase and come midgame had significant time advantage throughout most of the match, while Ding was frequently under time pressure, and spent a lot more time thinking, even in the opening.
+Finally, there was also the issue of . 
+
+With all that said, I reminded myself that Ding only lost due to an unfortunate blunder in the last stages of the final game, while he was under time pressure. Had it not happened, the players would have continued to tiebreak games with faster time controls, where anything could have happened, and maybe Ding would've emerged as the winner in this scenario. Perhaps then Gukesh's active and open style could be seen as careless and as a sign of inexperience next to Ding's more conservative and balanced style. So perhaps my impression of the match was biased due to the final outcome? I decided to get hold of the games data, crunch the numbers and attempt to if the data supports my firsthand impressions.
+Analysis Plan
+Although many analyses of the match are available online, most tend to focus on a per-game breakdown, often neglecting cross-game synthesis and data-driven insights. I chose to adopt an empirical, holistic approach, which involves using raw game data as measurable evidence - data that is mostly easily accessible - and combining it to generate match-wide insights from a broader perspective. This approach allows for a more comprehensive understanding of the match as a whole, rather than isolated evaluations of individual games.
+During my analysis I decided to focus on several (mostly widely used) parameters, in an attempt to either support or refute the observations made earlier. List of the metrics used: 
+Accuracy -A widely used metric on online chess platforms to evaluate how closely a player's moves align with the optimal moves suggested by a chess engine. In this metric, engine-generated moves are considered ideal, and the player's accuracy score is determined by measuring the degree of deviation from these optimal moves across the game.
+Obtained from Lichess API.
+Blunders, Mistakes, and Inaccuracies - Another widely used metric. It classifies errors based on three categories:
+- Inaccuracy - mild deviation from optimal play, usually results in centipawn loss of 0–50
+- Mistake - moderate deviation from optimal play, usually results in centipawn loss of 100–200.
+- Blunder - severe deviation from optimal play, usually results in centipawn loss of >200. 
+Obtained from Lichess API.
+Average Centipawn Loss (ACPL) - A commonly used chess metric to evaluate the quality of a player's moves by measuring their deviations from the optimal moves suggested by a chess engine. In this context, a centipawn represents 1/100th of a pawn in material value. The lower the ACPL, the closer the player's moves are to engine-recommended decisions, and thus, the better their play. Unlike the previos metric, ACPL offers a precise numerical value for performance, making it easier to directly compare players. It is particularly useful for highlighting consistency and minimizing errors over a game or match.
+Obtained from Lichess API.
+Move Times - In this metric I wanted to segment the move times across games to get an idea about the players preparation and recognize time management trends in the opening phase. A significant advantage in clock time after the opening is indicative of better preparation and general efficiency and time management skills. In my opinion, it also allows us to gauge the players psychological states and game momentum, since usually faster moves=confidence. The segmentation is done across all games without regard to piece color, i.e. we combine a player's first moves equally whether he plays as black or white.
+Conversion Rate - This metric tracks how effectively a player converts winning or advantageous positions into actual victories. I focused here on advantages of >100 centipawns, since lower than that usually indicates a more equal position that would be hard for humans to capitalize on. Higher conversion rates usually should indicate active play, since a player is willing to push forward to get the W, instead of and capitalizing on opportunities
+Position Repetitions - This is the trickiest one, since in contrast to the above metrics, there's no official definition for it anywhere. This metric's aim is to capture how many times a player tried to repeat a position immediately after it was played, in an attempt to get a draw by threefold repetition. This is kind of like an unofficial draw offer. Although sometimes there's really nothing left to do but repeat a position to avoid worsening your position, in my opinion this metric could say a lot about the game. It could say how much a player 
+
+Data Analysis
+I downloaded the match PGNs from the official world championship website, complete with move times. 
+
+Conclusions
+All in all, I was surprised by some of the results which showed a much bigger advantage for Gukesh in some parameters, than I previously thought. Surely,

@@ -1,0 +1,3 @@
+python-lichess==0.10
+seaborn==0.13.2
+chess==1.11.1
