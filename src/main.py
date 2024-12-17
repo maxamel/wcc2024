@@ -56,8 +56,6 @@ def main():
 
         print(f'The game details: \n{game.headers}')
 
-        curr_player = game_white_player
-
         stats[game_white_player["name"]].move_times.append([])
         stats[game_black_player["name"]].move_times.append([])
 
@@ -95,19 +93,35 @@ def main():
             elif json_game["winner"] == "black":
                 stats[game_black_player["name"]].wins += 1
 
-        while game.next():
-            game = game.next()
+        white_prev_move = None
+        black_prev_move = None
+        curr_player = game_white_player
+        curr_prev_move = white_prev_move
+        game = game.next()
+        while game:
+            reversed_move = f'{str(game.move)[2:]}{str(game.move)[:2]}'
+            if reversed_move == curr_prev_move:
+                print(f'Player {curr_player["name"]} repeated move {game.move}')
+                stats[curr_player["name"]].repeated_moves += 1
             emt = game.emt()
             if emt is None:
+                print(game.clock())
+                if len(stats[curr_player["name"]].clocks[-1]) == 0:
+                    stats[curr_player["name"]].clocks[-1].append(7200)
                 emt = stats[curr_player["name"]].clocks[-1][-1] - game.clock()
                 print(f'emt is None in game {i}, clock: {game.clock()}, previous clock: {stats[curr_player["name"]].clocks[-1][-1]}, move: {game.move}. Computed move time: {emt}')
             stats[curr_player["name"]].move_times[-1].append(emt)
             stats[curr_player["name"]].clocks[-1].append(game.clock())
             # switch to other player for next move
             if curr_player["name"] == game_white_player["name"]:
+                white_prev_move = str(game.move)
                 curr_player = game_black_player
+                curr_prev_move = black_prev_move
             else:
+                black_prev_move = str(game.move)
                 curr_player = game_white_player
+                curr_prev_move = white_prev_move
+            game = game.next()
 
     print(stats)
 
@@ -130,7 +144,8 @@ def main():
     plot_accuracy(stats, game_white_player, game_black_player)
     plot_errors(stats, game_white_player, game_black_player)
     plot_conversions(stats, game_white_player, game_black_player)
-    plot_moves(stats, game_black_player, game_white_player)
+    plot_moves(stats, game_white_player, game_black_player)
+    plot_repeated_moves(stats, game_white_player, game_black_player)
 
 
 def plot_acpl(stats: dict[str, PlayerStats], game_white_player, game_black_player):
@@ -293,7 +308,7 @@ def plot_conversions(stats: dict[str, PlayerStats], game_white_player, game_blac
     plt.show()
 
 
-def plot_moves(stats: dict[str, PlayerStats],game_black_player, game_white_player):
+def plot_moves(stats: dict[str, PlayerStats], game_white_player, game_black_player):
     list1 = list(stats[game_white_player["name"]].mean_move_times_list())[:10]
     list2 = list(stats[game_black_player["name"]].mean_move_times_list())[:10]
 
@@ -311,6 +326,44 @@ def plot_moves(stats: dict[str, PlayerStats],game_black_player, game_white_playe
     plt.xlabel("Move Number")
     plt.ylabel("Move Time")
     plt.legend(title='Players')
+    plt.show()
+
+
+def plot_repeated_moves(stats: dict[str, PlayerStats], game_white_player, game_black_player):
+
+    white_accuracy = (stats[game_white_player["name"]].repeated_moves)
+    black_accuracy = (stats[game_black_player["name"]].repeated_moves)
+
+    # Sample Data
+    data = {
+        "Metric": ["Repeated Moves"],
+        game_white_player["name"]: [white_accuracy],
+        game_black_player["name"]: [black_accuracy]
+    }
+
+    # Create DataFrame
+    df = pd.DataFrame(data)
+
+    # Separate into two datasets
+    data_points = df.iloc[:1].melt(id_vars="Metric", var_name="Player", value_name="Rate")
+
+    # Create subplots
+    fig, axes = plt.subplots(1, 1, figsize=(12, 6), sharey=True)
+
+    # Plot Conversion Metrics
+    sns.barplot(data=data_points, x="Metric", y="Rate", hue="Player", ax=axes, palette=['red', 'green'])
+    for p in axes.patches:
+        axes.annotate(f'{p.get_height():.1f}',
+                      (p.get_x() + p.get_width() / 2., p.get_height()),
+                      ha='center', va='center',
+                      fontsize=12, color='black',
+                      xytext=(0, 5), textcoords='offset points')
+    axes.set_title("Repeated Moves")
+    axes.set_ylabel("Amount")
+    axes.set_xlabel("Metric")
+
+    # Adjust layout and show
+    plt.tight_layout()
     plt.show()
 
 

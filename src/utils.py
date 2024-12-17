@@ -14,6 +14,7 @@ class PlayerStats:
         self.comebacks: int = 0
         self.advantages: int = 0
         self.wins: int = 0
+        self.repeated_moves: int = 0
         self.games: int = 0
 
     def __repr__(self):
@@ -27,6 +28,7 @@ class PlayerStats:
                 f'Disadvantages: {self.disadvantages}, \n'
                 f'Comebacks: {self.comebacks}, \n'
                 f'Wins: {self.wins}, \n'
+                f'Repeated positions: {self.repeated_moves}, \n'
                 #f'MoveTimes: {self.move_times}, \n'
                 f'Games: {self.games} \n')
 
