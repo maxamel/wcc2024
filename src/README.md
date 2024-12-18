@@ -69,7 +69,7 @@ The data on blunders, mistakes, and inaccuracies indicates that Ding played a mo
    
 ![](https://miro.medium.com/v2/resize:fit:770/1*PgZzAn2OpD0vfe6S5QgG-w.png)
    
-The average centipawn loss shows a very slight advantage (less than 1 centipawn) for Gukesh. This connects well with the accuracy metric we got, which showed a negligible advantage for Gukesh.
+The average centipawn loss shows a very slight advantage (less than 1 centipawn) for Ding. This is similar to the accuracy metric we got, which showed a negligible advantage for Gukesh.
    
 4. **Move Times:**
    
