@@ -1,7 +1,7 @@
 # World Chess Championship 2024 Analysis
 
-This repository contains an in-depth analysis of the World Chess Championship (WCC) 2024 match between Grandmasters Ding Liren and Gukesh D. 
-The analysis focuses on various performance metrics to provide insights into the players' strategies and game dynamics.
+This repository contains the scripts used for analysis of the World Chess Championship (WCC) 2024 match using an empirical synthesized approach. 
+The full article of the analysis is in the src/README.md or on [medium](https://medium.com/@maxamel2002/2024-world-chess-championship-analysis-empirical-synthesized-approach-98dd79920d2b). 
 
 ---
 
